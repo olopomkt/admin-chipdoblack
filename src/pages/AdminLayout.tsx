@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, Users, Cpu, ScrollText, DollarSign, Settings,
-  Flame, LogOut, Menu, X, RefreshCw,
+  LogOut, Menu, X, RefreshCw,
 } from 'lucide-react'
 import type { AdminUser } from '../types'
 

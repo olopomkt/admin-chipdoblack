@@ -25,9 +25,9 @@ export function AdminLayout({ admin, onLogout }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-bg1 flex">
+    <div className="min-h-screen bg-transparent flex">
       {/* Sidebar desktop */}
-      <aside className="hidden lg:flex flex-col w-64 bg-bg2 border-r border-coal fixed h-screen">
+      <aside className="hidden lg:flex flex-col w-72 glass-panel border-r border-coal fixed h-screen z-40 shadow-2xl">
         <SidebarContent admin={admin} onLogout={onLogout} />
       </aside>
 
@@ -40,14 +40,14 @@ export function AdminLayout({ admin, onLogout }: AdminLayoutProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSidebarOpen(false)}
-              className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
             />
             <motion.aside
               initial={{ x: -280 }}
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed h-screen w-64 bg-bg2 border-r border-coal z-50 lg:hidden flex flex-col"
+              className="fixed h-screen w-72 glass-panel border-r border-coal z-50 lg:hidden flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.5)]"
             >
               <SidebarContent admin={admin} onLogout={onLogout} onNavClick={() => setSidebarOpen(false)} />
             </motion.aside>
@@ -56,9 +56,9 @@ export function AdminLayout({ admin, onLogout }: AdminLayoutProps) {
       </AnimatePresence>
 
       {/* Main content */}
-      <div className="flex-1 lg:ml-64">
-        <header className="sticky top-0 z-30 bg-bg2/80 backdrop-blur-md border-b border-coal px-4 lg:px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <div className="flex-1 lg:ml-72 relative z-10 flex flex-col min-h-screen">
+        <header className="sticky top-0 z-30 glass-panel border-b border-coal px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(true)}
               className="lg:hidden text-txt2 hover:text-txt0"
@@ -87,13 +87,13 @@ export function AdminLayout({ admin, onLogout }: AdminLayoutProps) {
 function SidebarContent({ admin, onLogout, onNavClick }: { admin: AdminUser; onLogout: () => void; onNavClick?: () => void }) {
   return (
     <>
-      <div className="p-5 border-b border-coal flex items-center gap-3">
-        <div className="w-10 h-10 bg-ember/10 rounded-xl flex items-center justify-center">
-          <Flame size={22} className="text-ember" />
+      <div className="p-6 border-b border-coal flex items-center gap-4">
+        <div className="w-12 h-12 bg-cyan/10 rounded-xl border border-cyan/30 flex items-center justify-center tech-glow">
+          <Cpu size={24} className="text-cyan drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
         </div>
         <div>
-          <h1 className="text-txt0 font-bold text-sm">Chip do Black</h1>
-          <p className="text-txt2 text-xs">Admin Panel</p>
+          <h1 className="text-txt0 font-bold tracking-wide uppercase text-sm">Chip do Black</h1>
+          <p className="text-cyan text-xs font-mono tracking-widest mt-0.5 opacity-80">SYS_ADMIN</p>
         </div>
         {onNavClick && (
           <button onClick={onNavClick} className="ml-auto text-txt2 hover:text-txt0 lg:hidden">
@@ -102,17 +102,17 @@ function SidebarContent({ admin, onLogout, onNavClick }: { admin: AdminUser; onL
         )}
       </div>
 
-      <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
         {navItems.map(item => (
           <NavLink
             key={item.to}
             to={item.to}
             onClick={onNavClick}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center gap-4 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                 isActive
-                  ? 'bg-ember/10 text-ember'
-                  : 'text-txt2 hover:text-txt0 hover:bg-bg3'
+                  ? 'bg-cyan/10 border border-cyan/30 text-cyan tech-glow shadow-[inset_0_0_12px_rgba(0,229,255,0.1)] translate-x-1'
+                  : 'border border-transparent text-txt2 hover:text-txt0 hover:bg-white/5 hover:border-white/10'
               }`
             }
           >
@@ -122,14 +122,17 @@ function SidebarContent({ admin, onLogout, onNavClick }: { admin: AdminUser; onL
         ))}
       </nav>
 
-      <div className="p-3 border-t border-coal">
-        <div className="px-3 py-2 text-xs text-txt2 truncate">{admin.email}</div>
+      <div className="p-4 border-t border-coal glass-panel">
+        <div className="px-4 py-2 mb-2 bg-black/20 rounded border border-coal/50 text-xs text-txt2 font-mono tracking-wide truncate flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-success animate-pulse shadow-[0_0_6px_rgba(0,230,118,0.8)]" />
+          {admin.email}
+        </div>
         <button
           onClick={onLogout}
-          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-crimson hover:bg-crimson/10 transition-colors"
+          className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-crimson/30 rounded-xl text-sm font-medium text-crimson hover:bg-crimson/10 hover:shadow-[0_0_12px_rgba(255,42,85,0.2)] transition-all duration-300"
         >
           <LogOut size={18} />
-          Sair
+          Encerrar Sessão
         </button>
       </div>
     </>

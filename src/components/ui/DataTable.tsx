@@ -133,7 +133,7 @@ export function DataTable<T extends Record<string, any>>({
                 <th
                   key={col.key}
                   onClick={col.sortable !== false ? () => handleSort(col.key) : undefined}
-                  className={`px-4 py-3 text-left text-txt2 font-medium ${
+                  className={`px-5 py-3.5 text-left text-txt2 font-medium ${
                     col.sortable !== false ? 'cursor-pointer hover:text-txt0 select-none' : ''
                   } ${col.className || ''}`}
                 >
@@ -150,7 +150,7 @@ export function DataTable<T extends Record<string, any>>({
           <tbody>
             {paged.length === 0 ? (
               <tr>
-                <td colSpan={columns.length} className="px-4 py-8 text-center text-txt2">
+                <td colSpan={columns.length} className="px-5 py-10 text-center text-txt2">
                   {emptyMessage}
                 </td>
               </tr>
@@ -164,7 +164,7 @@ export function DataTable<T extends Record<string, any>>({
                   }`}
                 >
                   {columns.map(col => (
-                    <td key={col.key} className={`px-4 py-3 text-txt1 ${col.className || ''}`}>
+                    <td key={col.key} className={`px-5 py-3.5 text-txt1 ${col.className || ''}`}>
                       {col.render ? col.render(row) : String(row[col.key] ?? '—')}
                     </td>
                   ))}

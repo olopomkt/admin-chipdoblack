@@ -59,7 +59,7 @@ export function LogsEventos() {
             key={ev}
             whileHover={{ scale: 1.02 }}
             onClick={() => setEventoFilter(eventoFilter === ev ? '' : ev)}
-            className={`p-3 rounded-xl border transition-colors text-left ${
+            className={`p-4 rounded-xl border transition-colors text-left ${
               eventoFilter === ev
                 ? 'bg-ember/10 border-ember/30'
                 : 'bg-bg2 border-coal hover:border-coal/80'
@@ -73,11 +73,11 @@ export function LogsEventos() {
 
       {/* Critical events highlight */}
       {critical.length > 0 && (
-        <div className="bg-crimson/5 border border-crimson/20 rounded-xl p-4">
-          <h3 className="text-crimson font-semibold text-sm mb-3">Eventos Críticos Recentes</h3>
-          <div className="space-y-2 max-h-40 overflow-y-auto">
+        <div className="bg-crimson/5 border border-crimson/20 rounded-xl p-5">
+          <h3 className="text-crimson font-semibold text-sm mb-4">Eventos Críticos Recentes</h3>
+          <div className="space-y-2.5 max-h-40 overflow-y-auto">
             {critical.slice(0, 10).map((log, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm">
+              <div key={i} className="flex items-center gap-3 text-sm p-2 rounded-lg hover:bg-crimson/5">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt0 font-mono text-xs">{log.instancia}</span>
                 <span className="text-txt1">{log.usuario_nome || log.usuario_email}</span>
@@ -89,9 +89,9 @@ export function LogsEventos() {
       )}
 
       {/* Timeline */}
-      <div className="bg-bg2 border border-coal rounded-xl p-5">
-        <h3 className="text-txt0 font-semibold mb-4">Timeline</h3>
-        <div className="relative pl-6 space-y-3 max-h-60 overflow-y-auto">
+      <div className="bg-bg2 border border-coal rounded-xl p-6">
+        <h3 className="text-txt0 font-semibold mb-5">Timeline</h3>
+        <div className="relative pl-7 space-y-4 max-h-60 overflow-y-auto">
           <div className="absolute left-2 top-0 bottom-0 w-px bg-coal" />
           {logs.slice(0, 20).map((log, i) => (
             <motion.div

@@ -20,7 +20,7 @@ export function TableSkeleton({ rows = 5, cols = 5 }: { rows?: number; cols?: nu
 
 export function KPISkeleton() {
   return (
-    <div className="bg-bg2 border border-coal rounded-xl p-5 flex flex-col gap-3">
+    <div className="bg-bg2 border border-coal rounded-xl p-7 flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-5 w-5 rounded" />

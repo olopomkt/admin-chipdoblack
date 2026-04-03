@@ -51,7 +51,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 100 }}
-                className={`flex items-center gap-3 px-4 py-3 bg-bg2 border ${colors[t.type]} rounded-lg shadow-lg min-w-[300px]`}
+                className={`flex items-center gap-3 px-5 py-3.5 bg-bg2 border ${colors[t.type]} rounded-lg shadow-lg min-w-[300px]`}
               >
                 <Icon size={18} />
                 <span className="text-txt0 text-sm flex-1">{t.message}</span>

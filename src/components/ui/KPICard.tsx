@@ -14,7 +14,7 @@ export function KPICard({ label, value, icon: Icon, color = 'text-cyan', subtitl
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="glass-panel rounded-2xl p-6 flex flex-col gap-3 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,229,255,0.15)] hover:border-cyan/30 transition-all duration-300"
+      className="glass-panel rounded-2xl p-7 flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,229,255,0.15)] hover:border-cyan/30 transition-all duration-300"
     >
       {/* Decoração de fundo */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent rounded-bl-full -mr-16 -mt-16 group-hover:from-cyan/10 transition-colors" />

@@ -119,14 +119,14 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-              <div><span className="text-txt2">E-mail:</span> <span className="text-txt0">{pedido.email}</span></div>
-              <div><span className="text-txt2">Telefone:</span> <span className="text-txt0">{pedido.telefone}</span></div>
-              <div><span className="text-txt2">Status:</span> <StatusBadge status={pedido.status} /></div>
-              <div><span className="text-txt2">Valor:</span> <span className="text-txt0">{formatCurrency(preco)}</span></div>
-              <div><span className="text-txt2">Frequência:</span> <span className="text-txt0">{pedido.frequencia}</span></div>
-              <div><span className="text-txt2">Max Chips:</span> <span className="text-txt0">{pedido.max_chips}</span></div>
-              <div><span className="text-txt2">Conectados:</span> <span className="text-txt0">{pedido.chips_conectados}</span></div>
-              <div><span className="text-txt2">IP:</span> <span className="text-txt0">{pedido.ip_cadastro || '—'}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">E-mail:</span> <span className="text-txt0 ml-1.5">{pedido.email}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Telefone:</span> <span className="text-txt0 ml-1.5">{pedido.telefone}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Status:</span> <StatusBadge status={pedido.status} /></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Valor:</span> <span className="text-txt0 ml-1.5">{formatCurrency(preco)}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Frequência:</span> <span className="text-txt0 ml-1.5">{pedido.frequencia}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Max Chips:</span> <span className="text-txt0 ml-1.5">{pedido.max_chips}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">Conectados:</span> <span className="text-txt0 ml-1.5">{pedido.chips_conectados}</span></div>
+              <div className="p-3 bg-bg3/50 rounded-lg"><span className="text-txt2">IP:</span> <span className="text-txt0 ml-1.5">{pedido.ip_cadastro || '—'}</span></div>
             </div>
 
             {/* Chips */}
@@ -141,21 +141,21 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-bg3 text-txt2">
-                        <th className="px-3 py-2 text-left">Instância</th>
-                        <th className="px-3 py-2 text-left">WhatsApp</th>
-                        <th className="px-3 py-2 text-left">Status</th>
-                        <th className="px-3 py-2 text-left">1a Msg</th>
-                        <th className="px-3 py-2 text-left">Atualizado</th>
+                        <th className="px-4 py-3 text-left">Instância</th>
+                        <th className="px-4 py-3 text-left">WhatsApp</th>
+                        <th className="px-4 py-3 text-left">Status</th>
+                        <th className="px-4 py-3 text-left">1a Msg</th>
+                        <th className="px-4 py-3 text-left">Atualizado</th>
                       </tr>
                     </thead>
                     <tbody>
                       {instancias.map(inst => (
                         <tr key={inst.id} className="border-t border-coal/50">
-                          <td className="px-3 py-2 text-txt0 font-mono text-xs">{inst.instancia}</td>
-                          <td className="px-3 py-2 text-txt1">{inst.whatsapp}</td>
-                          <td className="px-3 py-2"><StatusBadge status={inst.status} /></td>
-                          <td className="px-3 py-2 text-txt1">{inst.primeira_mensagem_enviada === 'true' ? 'Sim' : 'Não'}</td>
-                          <td className="px-3 py-2 text-txt2 text-xs">{formatDate(inst.updated_at)}</td>
+                          <td className="px-4 py-3 text-txt0 font-mono text-xs">{inst.instancia}</td>
+                          <td className="px-4 py-3 text-txt1">{inst.whatsapp}</td>
+                          <td className="px-4 py-3"><StatusBadge status={inst.status} /></td>
+                          <td className="px-4 py-3 text-txt1">{inst.primeira_mensagem_enviada === 'true' ? 'Sim' : 'Não'}</td>
+                          <td className="px-4 py-3 text-txt2 text-xs">{formatDate(inst.updated_at)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -172,9 +172,9 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
               {logs.length === 0 ? (
                 <p className="text-txt2 text-sm">Nenhum log.</p>
               ) : (
-                <div className="max-h-48 overflow-y-auto space-y-1.5">
+                <div className="max-h-48 overflow-y-auto space-y-2">
                   {logs.map(log => (
-                    <div key={log.id} className="flex items-center gap-2 text-sm p-2 bg-bg3 rounded">
+                    <div key={log.id} className="flex items-center gap-3 text-sm p-3 bg-bg3 rounded-lg">
                       <StatusBadge status={log.evento} />
                       <span className="text-txt1 font-mono text-xs">{log.instancia}</span>
                       <span className="text-txt2 text-xs flex-1 truncate">{log.detalhes}</span>
@@ -186,10 +186,10 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
             </div>
 
             {/* Actions */}
-            <div className="border-t border-coal pt-4">
-              <h4 className="text-txt0 font-semibold mb-3">Ações</h4>
+            <div className="border-t border-coal pt-5">
+              <h4 className="text-txt0 font-semibold mb-4">Ações</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="flex items-center gap-2 p-3 bg-bg3 rounded-lg">
+                <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
                   <label className="text-txt2 text-sm whitespace-nowrap">Estender:</label>
                   <input type="number" min={1} max={30} value={extendDays} onChange={e => setExtendDays(+e.target.value)}
                     className="w-16 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm" />
@@ -197,7 +197,7 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
                   <button onClick={handleExtend} className="ml-auto px-3 py-1 bg-ember/20 text-ember rounded text-sm hover:bg-ember/30">Aplicar</button>
                 </div>
 
-                <div className="flex items-center gap-2 p-3 bg-bg3 rounded-lg">
+                <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
                   <label className="text-txt2 text-sm whitespace-nowrap">Frequência:</label>
                   <select value={newFreq} onChange={e => setNewFreq(e.target.value)}
                     className="flex-1 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm">
@@ -208,14 +208,14 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
                   <button onClick={handleChangeFreq} className="px-3 py-1 bg-ember/20 text-ember rounded text-sm hover:bg-ember/30">Aplicar</button>
                 </div>
 
-                <div className="flex items-center gap-2 p-3 bg-bg3 rounded-lg">
+                <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
                   <label className="text-txt2 text-sm whitespace-nowrap">Max Chips:</label>
                   <input type="number" min={1} max={20} value={newMaxChips} onChange={e => setNewMaxChips(+e.target.value)}
                     className="w-16 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm" />
                   <button onClick={handleChangeMaxChips} className="ml-auto px-3 py-1 bg-ember/20 text-ember rounded text-sm hover:bg-ember/30">Aplicar</button>
                 </div>
 
-                <div className="flex items-center gap-2 p-3 bg-bg3 rounded-lg">
+                <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
                   <label className="text-txt2 text-sm whitespace-nowrap">Status:</label>
                   <select value={newStatus} onChange={e => setNewStatus(e.target.value)}
                     className="flex-1 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm">
@@ -249,10 +249,10 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
 
 function InfoItem({ icon: Icon, label, value }: { icon: typeof Hash; label: string; value: string }) {
   return (
-    <div className="flex items-center gap-2 p-2.5 bg-bg3 rounded-lg">
+    <div className="flex items-center gap-3 p-3.5 bg-bg3 rounded-lg">
       <Icon size={14} className="text-ember" />
       <div>
-        <div className="text-txt2 text-xs">{label}</div>
+        <div className="text-txt2 text-xs mb-0.5">{label}</div>
         <div className="text-txt0 text-sm font-medium">{value}</div>
       </div>
     </div>

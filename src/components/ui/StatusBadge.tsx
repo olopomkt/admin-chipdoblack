@@ -15,7 +15,7 @@ const statusConfig: Record<string, { label: string; className: string }> = {
 export function StatusBadge({ status }: { status: string }) {
   const config = statusConfig[status] || { label: status, className: 'bg-coal text-txt2 border-coal' }
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${config.className}`}>
+    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${config.className}`}>
       {config.label}
     </span>
   )

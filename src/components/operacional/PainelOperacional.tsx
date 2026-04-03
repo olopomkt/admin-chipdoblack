@@ -51,14 +51,14 @@ function AcoesEmMassa({ toast }: { toast: (msg: string, type?: 'success' | 'erro
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-bg2 border border-coal rounded-xl p-5"
+      className="bg-bg2 border border-coal rounded-xl p-6"
     >
-      <h3 className="text-txt0 font-semibold mb-4">Ações em Massa</h3>
+      <h3 className="text-txt0 font-semibold mb-5">Ações em Massa</h3>
       <div className="space-y-3">
         <button
           onClick={() => setConfirmExpire(true)}
           disabled={loading}
-          className="w-full flex items-center gap-3 px-4 py-3 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:border-warning/50 hover:text-warning transition-colors"
+          className="w-full flex items-center gap-3 px-5 py-3.5 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:border-warning/50 hover:text-warning transition-colors"
         >
           {loading ? <Loader2 size={18} className="animate-spin" /> : <AlertTriangle size={18} className="text-warning" />}
           Expirar planos vencidos manualmente
@@ -123,9 +123,9 @@ function CriarCortesia({ toast }: { toast: (msg: string, type?: 'success' | 'err
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="bg-bg2 border border-coal rounded-xl p-5"
+      className="bg-bg2 border border-coal rounded-xl p-6"
     >
-      <h3 className="text-txt0 font-semibold mb-4">Cortesia</h3>
+      <h3 className="text-txt0 font-semibold mb-5">Cortesia</h3>
       <button
         onClick={() => setOpen(true)}
         className="w-full flex items-center gap-3 px-4 py-3 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:border-ember/50 hover:text-ember transition-colors"
@@ -226,7 +226,7 @@ function GerenciarAdmins({ toast }: { toast: (msg: string, type?: 'success' | 'e
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="bg-bg2 border border-coal rounded-xl p-5"
+      className="bg-bg2 border border-coal rounded-xl p-6"
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-txt0 font-semibold flex items-center gap-2">
@@ -246,7 +246,7 @@ function GerenciarAdmins({ toast }: { toast: (msg: string, type?: 'success' | 'e
       </div>
 
       {showAdd && (
-        <div className="flex gap-2 mb-4 p-3 bg-bg3 rounded-lg">
+        <div className="flex gap-3 mb-4 p-4 bg-bg3 rounded-lg">
           <input value={newNome} onChange={e => setNewNome(e.target.value)} placeholder="Nome"
             className="flex-1 px-3 py-2 bg-bg1 border border-coal rounded text-sm text-txt0 placeholder-txt2" />
           <input value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="E-mail" type="email"
@@ -265,7 +265,7 @@ function GerenciarAdmins({ toast }: { toast: (msg: string, type?: 'success' | 'e
       ) : (
         <div className="space-y-2">
           {admins.map(admin => (
-            <div key={admin.email} className="flex items-center gap-3 p-3 bg-bg3 rounded-lg">
+            <div key={admin.email} className="flex items-center gap-4 p-4 bg-bg3 rounded-lg">
               <div className="flex-1">
                 <div className="text-txt0 text-sm font-medium">{admin.nome}</div>
                 <div className="text-txt2 text-xs">{admin.email}</div>
@@ -307,9 +307,9 @@ function LinksRapidos() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-bg2 border border-coal rounded-xl p-5"
+      className="bg-bg2 border border-coal rounded-xl p-6"
     >
-      <h3 className="text-txt0 font-semibold mb-4">Links Rápidos</h3>
+      <h3 className="text-txt0 font-semibold mb-5">Links Rápidos</h3>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {links.map(link => (
           <a
@@ -317,7 +317,7 @@ function LinksRapidos() {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-3 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:text-ember hover:border-ember/30 transition-colors"
+            className="flex items-center gap-3 px-5 py-3.5 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:text-ember hover:border-ember/30 transition-colors"
           >
             <link.icon size={16} />
             {link.label}

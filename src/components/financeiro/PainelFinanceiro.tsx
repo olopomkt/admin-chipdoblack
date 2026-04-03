@@ -80,9 +80,9 @@ export function PainelFinanceiro() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-bg2 border border-coal rounded-xl p-5"
+          className="bg-bg2 border border-coal rounded-xl p-6"
         >
-          <h3 className="text-txt0 font-semibold mb-4">Receita por Plano</h3>
+          <h3 className="text-txt0 font-semibold mb-5">Receita por Plano</h3>
           {loadingR ? (
             <div className="h-64 animate-pulse bg-coal/20 rounded" />
           ) : (
@@ -106,9 +106,9 @@ export function PainelFinanceiro() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-bg2 border border-coal rounded-xl p-5"
+          className="bg-bg2 border border-coal rounded-xl p-6"
         >
-          <h3 className="text-txt0 font-semibold mb-4">Testes Grátis vs Pagos</h3>
+          <h3 className="text-txt0 font-semibold mb-5">Testes Grátis vs Pagos</h3>
           {!m ? (
             <div className="h-64 animate-pulse bg-coal/20 rounded" />
           ) : (
@@ -160,9 +160,9 @@ export function PainelFinanceiro() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-bg2 border border-coal rounded-xl p-5"
+          className="bg-bg2 border border-coal rounded-xl p-6"
         >
-          <h3 className="text-txt0 font-semibold mb-4">Receita Acumulada (estimada, 30 dias)</h3>
+          <h3 className="text-txt0 font-semibold mb-5">Receita Acumulada (estimada, 30 dias)</h3>
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={receitaAcumulada}>
               <CartesianGrid strokeDasharray="3 3" stroke="#2a2a3a" />
@@ -192,21 +192,21 @@ export function PainelFinanceiro() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-coal text-txt2">
-                <th className="px-4 py-3 text-left">Plano</th>
-                <th className="px-4 py-3 text-right">Qtd</th>
-                <th className="px-4 py-3 text-right">Preço Unit.</th>
-                <th className="px-4 py-3 text-right">Receita</th>
-                <th className="px-4 py-3 text-right">% do Total</th>
+                <th className="px-5 py-3.5 text-left">Plano</th>
+                <th className="px-5 py-3.5 text-right">Qtd</th>
+                <th className="px-5 py-3.5 text-right">Preço Unit.</th>
+                <th className="px-5 py-3.5 text-right">Receita</th>
+                <th className="px-5 py-3.5 text-right">% do Total</th>
               </tr>
             </thead>
             <tbody>
               {(receita || []).map(r => (
                 <tr key={r.plano} className="border-b border-coal/30 hover:bg-bg3">
-                  <td className="px-4 py-3 text-txt0 font-mono text-xs">{r.plano}</td>
-                  <td className="px-4 py-3 text-right text-txt1">{r.quantidade}</td>
-                  <td className="px-4 py-3 text-right text-txt1">{formatCurrency(r.preco_unitario)}</td>
-                  <td className="px-4 py-3 text-right text-txt0 font-medium">{formatCurrency(r.receita_total)}</td>
-                  <td className="px-4 py-3 text-right text-txt2">
+                  <td className="px-5 py-3.5 text-txt0 font-mono text-xs">{r.plano}</td>
+                  <td className="px-5 py-3.5 text-right text-txt1">{r.quantidade}</td>
+                  <td className="px-5 py-3.5 text-right text-txt1">{formatCurrency(r.preco_unitario)}</td>
+                  <td className="px-5 py-3.5 text-right text-txt0 font-medium">{formatCurrency(r.receita_total)}</td>
+                  <td className="px-5 py-3.5 text-right text-txt2">
                     {stats.total > 0 ? ((r.receita_total / stats.total) * 100).toFixed(1) : '0'}%
                   </td>
                 </tr>
@@ -214,13 +214,13 @@ export function PainelFinanceiro() {
             </tbody>
             <tfoot>
               <tr className="border-t border-coal font-bold">
-                <td className="px-4 py-3 text-txt0">Total</td>
-                <td className="px-4 py-3 text-right text-txt0">
+                <td className="px-5 py-3.5 text-txt0">Total</td>
+                <td className="px-5 py-3.5 text-right text-txt0">
                   {(receita || []).reduce((s, r) => s + r.quantidade, 0)}
                 </td>
-                <td className="px-4 py-3" />
-                <td className="px-4 py-3 text-right text-ember">{formatCurrency(stats.total)}</td>
-                <td className="px-4 py-3 text-right text-txt2">100%</td>
+                <td className="px-5 py-3.5" />
+                <td className="px-5 py-3.5 text-right text-ember">{formatCurrency(stats.total)}</td>
+                <td className="px-5 py-3.5 text-right text-txt2">100%</td>
               </tr>
             </tfoot>
           </table>

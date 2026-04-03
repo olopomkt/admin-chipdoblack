@@ -61,7 +61,7 @@ export function DashboardAdmin() {
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="glass-panel rounded-2xl p-6 relative overflow-hidden group hover:border-cyan/20 transition-colors duration-300"
+          className="glass-panel rounded-2xl p-7 relative overflow-hidden group hover:border-cyan/20 transition-colors duration-300"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan/5 blur-3xl rounded-full -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-txt0 font-semibold mb-6 tracking-wide flex items-center gap-2">
@@ -95,7 +95,7 @@ export function DashboardAdmin() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className="glass-panel rounded-2xl p-6 relative overflow-hidden group hover:border-purple-neon/20 transition-colors duration-300"
+          className="glass-panel rounded-2xl p-7 relative overflow-hidden group hover:border-purple-neon/20 transition-colors duration-300"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-neon/5 blur-3xl rounded-full -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-txt0 font-semibold mb-6 tracking-wide flex items-center gap-2">
@@ -129,7 +129,7 @@ export function DashboardAdmin() {
               </ResponsiveContainer>
               <div className="space-y-3 text-sm flex-1">
                 {(receita || []).filter(r => r.receita_total > 0).map((r, i) => (
-                  <div key={r.plano} className="flex items-center gap-3 p-2 rounded-lg bg-black/20 border border-coal/30 hover:bg-black/40 transition-colors">
+                  <div key={r.plano} className="flex items-center gap-3 p-3 rounded-lg bg-black/20 border border-coal/30 hover:bg-black/40 transition-colors">
                     <div className="w-3 h-3 rounded-full shadow-[0_0_8px_currentColor]" style={{ background: PIE_COLORS[i % PIE_COLORS.length], color: PIE_COLORS[i % PIE_COLORS.length] }} />
                     <span className="text-txt1 font-medium flex-1 truncate">{r.plano}</span>
                     <span className="text-txt0 font-mono font-bold tracking-tight">{formatCurrency(r.receita_total)}</span>
@@ -147,7 +147,7 @@ export function DashboardAdmin() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
-          className="glass-panel rounded-2xl p-6 relative overflow-hidden group hover:border-success/20 transition-colors duration-300"
+          className="glass-panel rounded-2xl p-7 relative overflow-hidden group hover:border-success/20 transition-colors duration-300"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-success/5 blur-3xl rounded-full -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-txt0 font-semibold mb-6 tracking-wide flex items-center gap-2">
@@ -157,7 +157,7 @@ export function DashboardAdmin() {
           {m && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-4 p-4 bg-black/30 border border-coal/50 rounded-xl hover:border-success/30 transition-colors">
+                <div className="flex items-center gap-4 p-5 bg-black/30 border border-coal/50 rounded-xl hover:border-success/30 transition-colors">
                   <div className="p-2.5 bg-success/10 rounded-lg">
                     <Wifi size={20} className="text-success drop-shadow-[0_0_8px_currentColor]" />
                   </div>
@@ -166,7 +166,7 @@ export function DashboardAdmin() {
                     <div className="text-txt2 text-xs font-medium uppercase tracking-wider">Online</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-black/30 border border-coal/50 rounded-xl hover:border-crimson/30 transition-colors">
+                <div className="flex items-center gap-4 p-5 bg-black/30 border border-coal/50 rounded-xl hover:border-crimson/30 transition-colors">
                   <div className="p-2.5 bg-crimson/10 rounded-lg">
                     <WifiOff size={20} className="text-crimson drop-shadow-[0_0_8px_currentColor]" />
                   </div>
@@ -175,7 +175,7 @@ export function DashboardAdmin() {
                     <div className="text-txt2 text-xs font-medium uppercase tracking-wider">Offline</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-black/30 border border-coal/50 rounded-xl hover:border-warning/30 transition-colors">
+                <div className="flex items-center gap-4 p-5 bg-black/30 border border-coal/50 rounded-xl hover:border-warning/30 transition-colors">
                   <div className="p-2.5 bg-warning/10 rounded-lg">
                     <Clock size={20} className="text-warning drop-shadow-[0_0_8px_currentColor]" />
                   </div>
@@ -184,7 +184,7 @@ export function DashboardAdmin() {
                     <div className="text-txt2 text-xs font-medium uppercase tracking-wider">Aguardando</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 bg-black/30 border border-coal/50 rounded-xl hover:border-crimson/30 transition-colors">
+                <div className="flex items-center gap-4 p-5 bg-black/30 border border-coal/50 rounded-xl hover:border-crimson/30 transition-colors">
                   <div className="p-2.5 bg-crimson/10 rounded-lg">
                     <AlertTriangle size={20} className="text-crimson drop-shadow-[0_0_8px_currentColor]" />
                   </div>
@@ -215,7 +215,7 @@ export function DashboardAdmin() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          className="glass-panel rounded-2xl p-6 relative overflow-hidden group hover:border-amber/20 transition-colors duration-300"
+          className="glass-panel rounded-2xl p-7 relative overflow-hidden group hover:border-amber/20 transition-colors duration-300"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-amber/5 blur-3xl rounded-full -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-txt0 font-semibold mb-6 tracking-wide flex items-center gap-2">
@@ -236,7 +236,7 @@ export function DashboardAdmin() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                   key={i} 
-                  className="flex items-center gap-4 p-3 bg-black/30 border border-coal/30 hover:border-coal hover:bg-black/50 rounded-xl transition-colors"
+                  className="flex items-center gap-4 p-4 bg-black/30 border border-coal/30 hover:border-coal hover:bg-black/50 rounded-xl transition-colors"
                 >
                   <StatusBadge status={log.evento} />
                   <div className="flex-1 min-w-0">
@@ -257,7 +257,7 @@ export function DashboardAdmin() {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className="glass-panel rounded-2xl p-6 relative overflow-hidden group hover:border-blue-neon/20 transition-colors duration-300 xl:col-span-2"
+          className="glass-panel rounded-2xl p-7 relative overflow-hidden group hover:border-blue-neon/20 transition-colors duration-300 xl:col-span-2"
         >
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-neon/5 blur-3xl rounded-full -mr-32 -mt-32 pointer-events-none" />
           <h3 className="text-txt0 font-semibold mb-6 tracking-wide flex items-center gap-2">

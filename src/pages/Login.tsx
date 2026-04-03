@@ -33,9 +33,9 @@ export function Login({ onLogin, error, loading }: LoginProps) {
           <p className="text-txt2 mt-1">Painel Administrativo</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-bg2 border border-coal rounded-xl p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="bg-bg2 border border-coal rounded-xl p-7 space-y-5">
           <div>
-            <label className="block text-sm text-txt2 mb-1.5">E-mail</label>
+            <label className="block text-sm text-txt2 mb-2">E-mail</label>
             <input
               type="email"
               value={email}
@@ -47,7 +47,7 @@ export function Login({ onLogin, error, loading }: LoginProps) {
           </div>
 
           <div>
-            <label className="block text-sm text-txt2 mb-1.5">Senha</label>
+            <label className="block text-sm text-txt2 mb-2">Senha</label>
             <div className="relative">
               <input
                 type={showPw ? 'text' : 'password'}

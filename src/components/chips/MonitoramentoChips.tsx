@@ -109,14 +109,14 @@ export function MonitoramentoChips() {
       <h1 className="text-2xl font-bold text-txt0">Monitoramento de Chips</h1>
 
       {problematicos.length > 0 && (
-        <div className="bg-warning/10 border border-warning/30 rounded-xl p-4">
-          <div className="flex items-center gap-2 mb-2">
+        <div className="bg-warning/10 border border-warning/30 rounded-xl p-5">
+          <div className="flex items-center gap-2.5 mb-3">
             <AlertTriangle size={18} className="text-warning" />
             <span className="text-warning font-semibold text-sm">{problematicos.length} chip(s) com problemas</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
             {problematicos.slice(0, 6).map(inst => (
-              <div key={inst.id} className="flex items-center gap-2 text-sm p-2 bg-bg2 rounded">
+              <div key={inst.id} className="flex items-center gap-3 text-sm p-3 bg-bg2 rounded-lg">
                 <span className="text-txt0 font-mono text-xs">{inst.instancia}</span>
                 <span className="text-warning text-xs">{hasProblems(inst).join(', ')}</span>
               </div>
@@ -165,7 +165,7 @@ export function MonitoramentoChips() {
         ) : (
           <div className="space-y-2 max-h-[60vh] overflow-y-auto">
             {chipLogs.map(log => (
-              <div key={log.id} className="flex items-center gap-3 p-3 bg-bg3 rounded-lg">
+              <div key={log.id} className="flex items-center gap-4 p-4 bg-bg3 rounded-lg">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt1 text-sm flex-1">{log.detalhes || '—'}</span>
                 <span className="text-txt2 text-xs whitespace-nowrap">{formatDate(log.criado_em)}</span>

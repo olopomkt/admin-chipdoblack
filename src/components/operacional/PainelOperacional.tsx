@@ -5,7 +5,7 @@ import {
   Loader2, RefreshCw, Gift,
 } from 'lucide-react'
 import { apiFetch } from '../../config/api'
-import { useToast } from '../ui/Toast'
+import { useToast } from '../ui/ToastContext'
 import { ConfirmDialog } from '../ui/ConfirmDialog'
 import { Modal } from '../ui/Modal'
 import type { AdminUser } from '../../types'

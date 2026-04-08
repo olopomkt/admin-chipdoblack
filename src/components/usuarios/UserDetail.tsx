@@ -3,7 +3,7 @@ import { Cpu, ScrollText, Calendar, Zap, Hash, Clock } from 'lucide-react'
 import { apiFetch } from '../../config/api'
 import { Modal } from '../ui/Modal'
 import { StatusBadge } from '../ui/StatusBadge'
-import { useToast } from '../ui/Toast'
+import { useToast } from '../ui/ToastContext'
 import { ConfirmDialog } from '../ui/ConfirmDialog'
 import { formatDate, formatCurrency, PLANOS_PRECOS } from '../../types'
 import type { Pedido, Instancia, ChipLog } from '../../types'
@@ -177,7 +177,7 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
                     <div key={log.id} className="flex items-center gap-3 text-sm p-3 bg-bg3 rounded-lg">
                       <StatusBadge status={log.evento} />
                       <span className="text-txt1 font-mono text-xs">{log.instancia}</span>
-                      <span className="text-txt2 text-xs flex-1 truncate">{log.detalhes}</span>
+                      <span className="text-txt2 text-xs flex-1 truncate">{typeof log.detalhes === 'object' && log.detalhes !== null ? JSON.stringify(log.detalhes) : String(log.detalhes || '—')}</span>
                       <span className="text-txt2 text-xs">{formatDate(log.criado_em)}</span>
                     </div>
                   ))}

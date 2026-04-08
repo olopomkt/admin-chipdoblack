@@ -40,8 +40,8 @@ export function LogsEventos() {
     },
     { key: 'usuario_nome', label: 'Usuário', render: row => <span className="text-txt0">{row.usuario_nome || '—'}</span> },
     { key: 'usuario_email', label: 'E-mail', className: 'hidden lg:table-cell' },
-    { key: 'plano', label: 'Plano', render: row => <span className="font-mono text-xs">{row.plano || '—'}</span>, className: 'hidden md:table-cell' },
-    { key: 'detalhes', label: 'Detalhes', render: row => <span className="text-txt2 text-xs truncate max-w-[200px] block">{typeof row.detalhes === 'object' && row.detalhes !== null ? JSON.stringify(row.detalhes) : String(row.detalhes || '—')}</span>, className: 'hidden xl:table-cell' },
+    { key: 'plano', label: 'Plano', render: row => <span className="font-mono text-xs">{row.plano}</span>, className: 'hidden md:table-cell' },
+    { key: 'detalhes', label: 'Detalhes', render: row => <span className="text-txt2 text-xs truncate max-w-[200px] block">{row.detalhes || '—'}</span>, className: 'hidden xl:table-cell' },
     { key: 'criado_em', label: 'Data', render: row => <span className="text-xs">{formatDate(row.criado_em)}</span> },
   ]
 
@@ -80,7 +80,7 @@ export function LogsEventos() {
               <div key={i} className="flex items-center gap-3 text-sm p-2 rounded-lg hover:bg-crimson/5">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt0 font-mono text-xs">{log.instancia}</span>
-                <span className="text-txt1">{log.usuario_nome || log.usuario_email || '—'}</span>
+                <span className="text-txt1">{log.usuario_nome || log.usuario_email}</span>
                 <span className="text-txt2 text-xs ml-auto">{formatDate(log.criado_em)}</span>
               </div>
             ))}
@@ -111,7 +111,7 @@ export function LogsEventos() {
               <div className="flex items-center gap-2 flex-1 min-w-0">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt0 text-sm font-mono truncate">{log.instancia}</span>
-                <span className="text-txt2 text-xs truncate hidden md:inline">{log.usuario_nome || '—'}</span>
+                <span className="text-txt2 text-xs truncate hidden md:inline">{log.usuario_nome}</span>
               </div>
               <span className="text-txt2 text-xs whitespace-nowrap">{formatDate(log.criado_em)}</span>
             </motion.div>

@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { supabase } from '../config/supabaseClient'
 import { apiFetch } from '../config/api'
 import type { AdminUser } from '../types'
@@ -18,7 +18,17 @@ export function useAdmin() {
     error: null,
   })
 
-  const checkAdmin = useCallback(async () => {
+  useEffect(() => {
+    checkAdmin()
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+      checkAdmin()
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
+
+  async function checkAdmin() {
     try {
       const { data: { session } } = await supabase.auth.getSession()
       if (!session) {
@@ -54,17 +64,7 @@ export function useAdmin() {
         error: 'Erro ao verificar permissões.',
       })
     }
-  }, [])
-
-  useEffect(() => {
-    checkAdmin()
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-      checkAdmin()
-    })
-
-    return () => subscription.unsubscribe()
-  }, [checkAdmin])
+  }
 
   async function login(email: string, password: string) {
     setState(s => ({ ...s, loading: true, error: null }))

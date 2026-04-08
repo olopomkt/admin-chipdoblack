@@ -1,13 +1,20 @@
-import { useState, useCallback, type ReactNode } from 'react'
+import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react'
-import { ToastContext } from './ToastContext'
 
 interface Toast {
   id: number
   message: string
   type: 'success' | 'error' | 'info'
 }
+
+interface ToastContextType {
+  toast: (message: string, type?: Toast['type']) => void
+}
+
+const ToastContext = createContext<ToastContextType>({ toast: () => {} })
+
+export const useToast = () => useContext(ToastContext)
 
 let toastId = 0
 

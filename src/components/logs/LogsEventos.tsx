@@ -1,5 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, Component, type ReactNode } from 'react'
 import { motion } from 'framer-motion'
+import { AlertTriangle, RefreshCw } from 'lucide-react'
 import { apiFetch } from '../../config/api'
 import { usePolling } from '../../hooks/usePolling'
 import { DataTable, type Column } from '../ui/DataTable'
@@ -9,14 +10,42 @@ import type { LogRecente } from '../../types'
 
 const EVENTOS = ['conectou', 'desconectou', 'expirou', 'ban']
 
-export function LogsEventos() {
+function safeString(value: unknown): string {
+  if (value == null) return '—'
+  if (typeof value === 'object') return JSON.stringify(value)
+  return String(value)
+}
+
+class LogsErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false }
+  static getDerivedStateFromError() { return { hasError: true } }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20 gap-4">
+          <AlertTriangle size={40} className="text-warning" />
+          <p className="text-txt1 text-sm">Erro ao carregar logs.</p>
+          <button
+            onClick={() => this.setState({ hasError: false })}
+            className="flex items-center gap-2 px-4 py-2 bg-bg3 border border-coal rounded-lg text-sm text-txt1 hover:text-txt0 transition-colors"
+          >
+            <RefreshCw size={14} /> Tentar novamente
+          </button>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+function LogsContent() {
   const [eventoFilter, setEventoFilter] = useState('')
 
   const fetchLogs = useCallback(() =>
     apiFetch('/admin_logs_recentes') as Promise<LogRecente[]>
   , [])
 
-  const { data: allLogs, loading } = usePolling(fetchLogs, 30000)
+  const { data: allLogs, loading, error, refresh } = usePolling(fetchLogs, 30000)
 
   const logs = eventoFilter
     ? (allLogs || []).filter(l => l.evento === eventoFilter)
@@ -40,8 +69,8 @@ export function LogsEventos() {
     },
     { key: 'usuario_nome', label: 'Usuário', render: row => <span className="text-txt0">{row.usuario_nome || '—'}</span> },
     { key: 'usuario_email', label: 'E-mail', className: 'hidden lg:table-cell' },
-    { key: 'plano', label: 'Plano', render: row => <span className="font-mono text-xs">{row.plano}</span>, className: 'hidden md:table-cell' },
-    { key: 'detalhes', label: 'Detalhes', render: row => <span className="text-txt2 text-xs truncate max-w-[200px] block">{row.detalhes || '—'}</span>, className: 'hidden xl:table-cell' },
+    { key: 'plano', label: 'Plano', render: row => <span className="font-mono text-xs">{row.plano || '—'}</span>, className: 'hidden md:table-cell' },
+    { key: 'detalhes', label: 'Detalhes', render: row => <span className="text-txt2 text-xs truncate max-w-[200px] block">{safeString(row.detalhes)}</span>, className: 'hidden xl:table-cell' },
     { key: 'criado_em', label: 'Data', render: row => <span className="text-xs">{formatDate(row.criado_em)}</span> },
   ]
 
@@ -50,7 +79,18 @@ export function LogsEventos() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-txt0">Logs & Eventos</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold text-txt0">Logs & Eventos</h1>
+        {error && (
+          <button
+            onClick={refresh}
+            className="flex items-center gap-2 px-3 py-1.5 bg-crimson/10 border border-crimson/30 rounded-lg text-xs text-crimson hover:bg-crimson/20 transition-colors"
+          >
+            <AlertTriangle size={14} />
+            Erro ao carregar — Retentar
+          </button>
+        )}
+      </div>
 
       {/* Event summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -80,7 +120,7 @@ export function LogsEventos() {
               <div key={i} className="flex items-center gap-3 text-sm p-2 rounded-lg hover:bg-crimson/5">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt0 font-mono text-xs">{log.instancia}</span>
-                <span className="text-txt1">{log.usuario_nome || log.usuario_email}</span>
+                <span className="text-txt1">{log.usuario_nome || log.usuario_email || '—'}</span>
                 <span className="text-txt2 text-xs ml-auto">{formatDate(log.criado_em)}</span>
               </div>
             ))}
@@ -111,7 +151,7 @@ export function LogsEventos() {
               <div className="flex items-center gap-2 flex-1 min-w-0">
                 <StatusBadge status={log.evento} />
                 <span className="text-txt0 text-sm font-mono truncate">{log.instancia}</span>
-                <span className="text-txt2 text-xs truncate hidden md:inline">{log.usuario_nome}</span>
+                <span className="text-txt2 text-xs truncate hidden md:inline">{log.usuario_nome || '—'}</span>
               </div>
               <span className="text-txt2 text-xs whitespace-nowrap">{formatDate(log.criado_em)}</span>
             </motion.div>
@@ -138,5 +178,13 @@ export function LogsEventos() {
         }
       />
     </div>
+  )
+}
+
+export function LogsEventos() {
+  return (
+    <LogsErrorBoundary>
+      <LogsContent />
+    </LogsErrorBoundary>
   )
 }

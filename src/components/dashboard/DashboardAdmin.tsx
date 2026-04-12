@@ -241,7 +241,7 @@ export function DashboardAdmin() {
                   <StatusBadge status={log.evento} />
                   <div className="flex-1 min-w-0">
                     <div className="text-txt0 text-sm font-medium truncate">{log.instancia}</div>
-                    <div className="text-txt2 text-xs truncate">{log.usuario_nome || log.usuario_email}</div>
+                    <div className="text-txt2 text-xs truncate">{log.usuario_nome || log.usuario_email || '—'}</div>
                   </div>
                   <span className="text-txt2/80 text-xs font-mono whitespace-nowrap bg-black/40 px-2 py-1 rounded">{formatDate(log.criado_em)}</span>
                 </motion.div>

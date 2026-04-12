@@ -167,7 +167,7 @@ export function MonitoramentoChips() {
             {chipLogs.map(log => (
               <div key={log.id} className="flex items-center gap-4 p-4 bg-bg3 rounded-lg">
                 <StatusBadge status={log.evento} />
-                <span className="text-txt1 text-sm flex-1">{log.detalhes || '—'}</span>
+                <span className="text-txt1 text-sm flex-1">{typeof log.detalhes === 'object' && log.detalhes !== null ? JSON.stringify(log.detalhes) : String(log.detalhes || '—')}</span>
                 <span className="text-txt2 text-xs whitespace-nowrap">{formatDate(log.criado_em)}</span>
               </div>
             ))}

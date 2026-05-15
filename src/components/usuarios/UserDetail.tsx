@@ -24,6 +24,7 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
 
   // Action form states
   const [extendDays, setExtendDays] = useState(2)
+  const [novaDataFim, setNovaDataFim] = useState('')
   const [newFreq, setNewFreq] = useState('')
   const [newMaxChips, setNewMaxChips] = useState(0)
   const [newStatus, setNewStatus] = useState('')
@@ -66,13 +67,34 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
   }
 
   const handleExtend = () => {
+    const agora = new Date()
+    const dataFimAtual = new Date(pedido.data_fim)
+    const baseDate = dataFimAtual < agora ? agora : dataFimAtual
+    const novaData = new Date(baseDate.getTime() + extendDays * 24 * 60 * 60 * 1000)
     setConfirmAction({
       title: 'Estender Prazo',
-      message: `Adicionar ${extendDays} dias ao pedido de ${pedido.nome}?`,
+      message: `Adicionar ${extendDays} dias ao pedido de ${pedido.nome}? (${dataFimAtual < agora ? 'a partir de agora' : 'a partir do fim atual'})`,
       action: async () => {
-        const newEnd = new Date(pedido.data_fim)
-        newEnd.setDate(newEnd.getDate() + extendDays)
-        await patchPedido({ data_fim: newEnd.toISOString() })
+        await patchPedido({
+          data_fim: novaData.toISOString(),
+          dias: pedido.dias + extendDays,
+          status: 'aguardando_conexao',
+        })
+      },
+    })
+  }
+
+  const handleSetDataFim = () => {
+    if (!novaDataFim) return
+    const dataEscolhida = new Date(novaDataFim)
+    setConfirmAction({
+      title: 'Definir Data Final',
+      message: `Definir data de expiração de ${pedido.nome} para ${dataEscolhida.toLocaleDateString('pt-BR')} ${dataEscolhida.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}?`,
+      action: async () => {
+        await patchPedido({
+          data_fim: dataEscolhida.toISOString(),
+          status: 'aguardando_conexao',
+        })
       },
     })
   }
@@ -191,10 +213,17 @@ export function UserDetail({ pedido, open, onClose, onUpdated }: UserDetailProps
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
                   <label className="text-txt2 text-sm whitespace-nowrap">Estender:</label>
-                  <input type="number" min={1} max={30} value={extendDays} onChange={e => setExtendDays(+e.target.value)}
+                  <input type="number" min={1} max={365} value={extendDays} onChange={e => setExtendDays(+e.target.value)}
                     className="w-16 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm" />
                   <span className="text-txt2 text-sm">dias</span>
                   <button onClick={handleExtend} className="ml-auto px-3 py-1 bg-ember/20 text-ember rounded text-sm hover:bg-ember/30">Aplicar</button>
+                </div>
+
+                <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
+                  <label className="text-txt2 text-sm whitespace-nowrap">Data final:</label>
+                  <input type="datetime-local" value={novaDataFim} onChange={e => setNovaDataFim(e.target.value)}
+                    className="flex-1 px-2 py-1 bg-bg1 border border-coal rounded text-txt0 text-sm" />
+                  <button onClick={handleSetDataFim} className="px-3 py-1 bg-ember/20 text-ember rounded text-sm hover:bg-ember/30">Aplicar</button>
                 </div>
 
                 <div className="flex items-center gap-3 p-4 bg-bg3 rounded-lg">
